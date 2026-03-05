@@ -4,12 +4,18 @@ import pl.jeremy.model.road.RoadDirection;
 
 public class Vehicle {
     private final String id;
-    private final RoadDirection startRoad;
-    private final RoadDirection endRoad;
+    private final VehicleRoute route;
 
     public Vehicle(String id, RoadDirection startRoad, RoadDirection endingRoadDirection) {
         this.id = id;
-        this.startRoad = startRoad;
-        this.endRoad = endingRoadDirection;
+        this.route = new VehicleRoute(startRoad, endingRoadDirection);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public VehicleRoute getRoute() {
+        return route;
     }
 }
