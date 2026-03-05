@@ -18,6 +18,26 @@ public class Lane {
         return laneType;
     }
 
+    public void addVehicle(Vehicle vehicle) {
+        vehicles.offer(vehicle);
+    }
+
+    public Vehicle removeVehicle() {
+        return vehicles.poll();
+    }
+
+    public Vehicle getFirstVehicle() {
+        return vehicles.peek();
+    }
+
+    public int getVehicleCount() {
+        return vehicles.size();
+    }
+
+    public boolean isEmpty() {
+        return vehicles.isEmpty();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;

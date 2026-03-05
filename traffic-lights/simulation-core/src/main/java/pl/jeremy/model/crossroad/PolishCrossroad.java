@@ -1,11 +1,13 @@
 package pl.jeremy.model.crossroad;
 
 import java.util.HashMap;
+import java.util.Map;
 import pl.jeremy.model.road.RoadDirection;
 import pl.jeremy.model.road.SingleLaneRoad;
 import pl.jeremy.model.trafficlights.PolishTrafficLightStatePolicy;
 import pl.jeremy.model.trafficlights.RoadTrafficLight;
 import pl.jeremy.model.trafficlights.TrafficLightState;
+import pl.jeremy.model.vehicle.Vehicle;
 
 public class PolishCrossroad {
     private final HashMap<RoadDirection, SingleLaneRoad> roads;
@@ -32,5 +34,20 @@ public class PolishCrossroad {
                 new SingleLaneRoad(
                         RoadDirection.EAST,
                         new RoadTrafficLight(new PolishTrafficLightStatePolicy(), TrafficLightState.RED)));
+    }
+
+    public SingleLaneRoad getRoad(RoadDirection direction) {
+        return roads.get(direction);
+    }
+
+    public Map<RoadDirection, SingleLaneRoad> getRoads() {
+        return roads;
+    }
+
+    public void addVehicle(Vehicle vehicle) {
+        SingleLaneRoad road = roads.get(vehicle.getRoute().startRoad());
+        if (road != null) {
+            road.getEntanceLane().addVehicle(vehicle);
+        }
     }
 }
