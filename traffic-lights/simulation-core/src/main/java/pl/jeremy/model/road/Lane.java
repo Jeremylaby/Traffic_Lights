@@ -40,7 +40,9 @@ public class Lane {
 
     @Override
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Lane lane = (Lane) o;
         return laneType == lane.laneType && Objects.equals(vehicles, lane.vehicles);
     }

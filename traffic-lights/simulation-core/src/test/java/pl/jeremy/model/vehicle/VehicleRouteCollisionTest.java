@@ -113,7 +113,7 @@ public class VehicleRouteCollisionTest {
             pair(W_N, S_E));
 
     @Test
-    void uTurnShouldCollideWithOppositeStraight_inThisModel() {
+    void uTurnShouldCollideWithOppositeStraight() {
         // conservative expectation: U-turn is always colliding
         assertTrue(collides(N_N, S_N));
         assertTrue(collides(E_E, W_E));

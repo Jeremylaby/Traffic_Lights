@@ -92,7 +92,7 @@ public class VehicleRoutePriorityTest {
             new Case(Move.U_TURN, RoadDirection.WEST, Move.U_TURN, true));
 
     @Test
-    void manualMatrix_expectedValues_and_noPairDeadlocks() {
+    void manualMatrixExpectedValuesNoPairDeadlocks() {
         for (Case c : CASES) {
             VehicleRoute me = route(THIS_START, c.thisMove());
             VehicleRoute other = route(c.otherStart(), c.otherMove());

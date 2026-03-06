@@ -15,6 +15,10 @@ public class Vehicle {
         return id;
     }
 
+    public RoadDirection getStartRoad() {
+        return route.startRoad();
+    }
+
     public VehicleRoute getRoute() {
         return route;
     }
