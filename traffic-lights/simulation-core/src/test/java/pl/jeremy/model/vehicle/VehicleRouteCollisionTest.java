@@ -155,7 +155,7 @@ public class VehicleRouteCollisionTest {
 
             boolean expectedColliding;
             if (isUTurn(a) && isUTurn(b)) {
-                expectedColliding = false; // rule #1
+                expectedColliding = true; // rule #1
             } else {
                 expectedColliding = !NON_COLLIDING.contains(pair(a, b)); // rule #2
             }
