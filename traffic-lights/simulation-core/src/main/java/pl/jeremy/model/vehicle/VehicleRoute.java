@@ -30,7 +30,7 @@ public record VehicleRoute(RoadDirection startRoad, RoadDirection endRoad) {
      * right-turn are allowed (except the same start/end constraints below). - Same startRoad (same approach) or same
      * endRoad (same exit/merge) is considered colliding.
      */
-    boolean isColliding(VehicleRoute otherRoute) {
+    public boolean isColliding(VehicleRoute otherRoute) {
 
         // Conservative rule: any U-turn is considered colliding with any movement,
         // including another U-turn (project decision).
@@ -65,7 +65,7 @@ public record VehicleRoute(RoadDirection startRoad, RoadDirection endRoad) {
      *
      * <p>Note: U-turns are treated as colliding with everything by {@link #isColliding(VehicleRoute)}.
      */
-    boolean isUTurn() {
+    public boolean isUTurn() {
         return startRoad == endRoad;
     }
 
@@ -75,7 +75,7 @@ public record VehicleRoute(RoadDirection startRoad, RoadDirection endRoad) {
      * <p>Note: RoadDirection.left() is counter-clockwise, but because startRoad represents the approach direction, in
      * this project a "right turn" corresponds to startRoad.left() == endRoad.
      */
-    boolean isRightTurn() {
+    public boolean isRightTurn() {
         return startRoad.left() == endRoad;
     }
 
@@ -85,12 +85,12 @@ public record VehicleRoute(RoadDirection startRoad, RoadDirection endRoad) {
      * <p>Note: RoadDirection.right() is clockwise, and in this project a "left turn" corresponds to startRoad.right()
      * == endRoad.
      */
-    boolean isLeftTurn() {
+    public boolean isLeftTurn() {
         return startRoad.right() == endRoad;
     }
 
     /** Straight movement: the exit is in the opposite direction of the approach. */
-    boolean isStraight() {
+    public boolean isStraight() {
         return startRoad.opposite() == endRoad;
     }
 
@@ -109,7 +109,7 @@ public record VehicleRoute(RoadDirection startRoad, RoadDirection endRoad) {
      * oncoming traffic (simplified). - Deadlocks are accepted for certain combinations (e.g., all 4
      * straight/left/U-turn), and will be resolved later by a higher-level rule.
      */
-    boolean priority(VehicleRoute otherRoute) {
+    public boolean priority(VehicleRoute otherRoute) {
         // If movements do not collide, both can go.
         if (!isColliding(otherRoute)) {
             return true;

@@ -45,9 +45,16 @@ public class PolishCrossroad {
     }
 
     public void addVehicle(Vehicle vehicle) {
-        SingleLaneRoad road = roads.get(vehicle.getRoute().startRoad());
+        SingleLaneRoad road = getRoad(vehicle.getRoute().startRoad());
         if (road != null) {
             road.getEntanceLane().addVehicle(vehicle);
+        }
+    }
+
+    public void removeVehicle(Vehicle vehicle) {
+        SingleLaneRoad road = getRoad(vehicle.getRoute().startRoad());
+        if (road != null) {
+            road.getEntanceLane().removeVehicle();
         }
     }
 }
