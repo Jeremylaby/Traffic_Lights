@@ -39,12 +39,12 @@ public record VehicleRoute(RoadDirection startRoad, RoadDirection endRoad) {
         }
 
         // Mirrored movements from opposite approaches are allowed simultaneously.
-        // This enables e.g. opposite straight or opposite left-left (project decision).
+        // This enables e.g., opposite straight or opposite left-left (project decision).
         if (startRoad.opposite() == otherRoute.startRoad && endRoad.opposite() == otherRoute.endRoad) {
             return false;
         }
 
-        // Same approach or same exit conflicts in this single-lane/merge model.
+        // The same approach or same exit conflicts in this single-lane/merge model.
         if (startRoad == otherRoute.startRoad || endRoad == otherRoute.endRoad) {
             return true;
         }
@@ -155,7 +155,7 @@ public record VehicleRoute(RoadDirection startRoad, RoadDirection endRoad) {
             return false;
         }
 
-        // Symmetric rule: if the other is left-turning and we are on its right or oncoming, we have priority.
+        // Symmetric rule: if the other is left-turning, and we are on its right or oncoming, we have priority.
         if (otherRoute.isLeftTurn()
                 && (otherRoute.startRoad.left() == startRoad || otherRoute.endRoad.right() == startRoad)) {
             return true;
