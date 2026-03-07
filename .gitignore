@@ -4,7 +4,13 @@
 # Log file
 *.log
 
-# Package files (build artifacts)
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
 *.jar
 *.war
 *.nar
@@ -13,25 +19,6 @@
 *.tar.gz
 *.rar
 
-# JVM crash logs
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
-
-# Env files
-.env
-.env.*
-!.example.env
-!*.example.env
-
-# IDE
-.idea/
-.vscode/
-*.iml
-*.iws
-*.ipr
-out/
-
-# Gradle
-.gradle/
-build/
-*/build/
