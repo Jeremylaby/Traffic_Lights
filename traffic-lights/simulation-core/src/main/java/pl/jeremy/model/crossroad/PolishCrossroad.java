@@ -1,6 +1,6 @@
 package pl.jeremy.model.crossroad;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 import pl.jeremy.model.road.RoadDirection;
 import pl.jeremy.model.road.SingleLaneRoad;
@@ -10,10 +10,10 @@ import pl.jeremy.model.trafficlights.TrafficLightState;
 import pl.jeremy.model.vehicle.Vehicle;
 
 public class PolishCrossroad {
-    private final HashMap<RoadDirection, SingleLaneRoad> roads;
+    private final EnumMap<RoadDirection, SingleLaneRoad> roads;
 
     public PolishCrossroad() {
-        this.roads = new HashMap<>();
+        this.roads = new EnumMap<>(RoadDirection.class);
         roads.put(
                 RoadDirection.NORTH,
                 new SingleLaneRoad(

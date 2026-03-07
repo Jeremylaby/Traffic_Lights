@@ -13,11 +13,8 @@ public final class CrossroadSimulation {
     private final VehicleReleasePolicy vehicleReleasePolicy;
     private int stepNumber;
 
-    public CrossroadSimulation(
-            PolishCrossroad crossroad,
-            TrafficLightStrategy trafficLightStrategy,
-            VehicleReleasePolicy vehicleReleasePolicy) {
-        this.crossroad = crossroad;
+    public CrossroadSimulation(TrafficLightStrategy trafficLightStrategy, VehicleReleasePolicy vehicleReleasePolicy) {
+        this.crossroad = new PolishCrossroad();
         this.trafficLightStrategy = trafficLightStrategy;
         this.vehicleReleasePolicy = vehicleReleasePolicy;
         this.stepNumber = 0;
@@ -37,7 +34,8 @@ public final class CrossroadSimulation {
     public StepResult step() {
         List<Vehicle> released = vehicleReleasePolicy.selectVehiclesToRelease(crossroad);
         released.forEach(crossroad::poolFirstVehicle);
-        List<String> releasedIds = released.stream().map(Vehicle::getId).toList();
+        List<String> releasedIds =
+                released.stream().map(Vehicle::getId).sorted().toList();
 
         trafficLightStrategy.advanceTrafficLights(crossroad);
 
