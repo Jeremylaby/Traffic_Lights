@@ -1,0 +1,207 @@
+Cześć, Stanisław!
+
+Dziękujemy za zainteresowanie stażem w AVSystem i Twoje CV.
+
+W ramach pierwszego etapu rekrutacji, prosimy, abyś stworzył symulację inteligentnych świateł drogowych na skrzyżowaniu. Celem zadania jest zaprojektowanie i zaimplementowanie systemu, który dostosowuje cykle świateł w oparciu o natężenie ruchu na poszczególnych drogach.
+
+Rozwiązanie zadania pomoże nam ocenić Twoje podejście do problemów oraz umiejętności programistyczne i będzie podstawą do dalszej dyskusji w ramach procesu rekrutacyjnego.
+
+Twój system powinien:
+
+Stanowić bliską rzeczywistości reprezentację skrzyżowania z czterema drogami dojazdowymi (północ, południe, wschód, zachód)
+
+Brać pod uwagę natężenie ruchu na pasach przy sterowaniu cyklem świateł 
+
+Symulować standardowe cykle świateł drogowych (np. zielone, żółte, czerwone) oraz ewentualne dodatkowe fazy (np. zielone strzałki) na każdej drodze dojazdowej
+
+Zapewniać bezpieczeństwo poprzez unikanie sytuacji konfliktowych, takich jak np. zielone światło dla dwóch kolidujących kierunków
+
+Śledzić liczbę pojazdów oczekujących na każdej drodze dojazdowej
+
+
+Oprócz spełnienia podstawowych wymagań chcemy zobaczyć Twoją kreatywność i umiejętności. Możesz zrobić to poprzez implementację dodatkowego rozszerzenia (lub kilku!), co pozwoli nam zobaczyć Twoje mocne strony. Przykładowymi dodatkowymi funkcjonalnościami mogą być różne tryby pracy świateł, kilka pasów na drodze dojazdowej, dodanie GUI, priorytetyzacja dróg, piesi, symulacja awarii itp. 
+
+
+
+Możesz także zaskoczyć nas aplikacją webową lub mobilną, testami czy infrastrukturą (CI, deployment, monitoring) – w AVSystem znajdziesz praktycznie każdą dziedzinę wytwarzania oprogramowania.
+
+Symulacja ma móc dodatkowo przyjmować listę komend w postaci pliku JSON. Każda komenda definiuje akcję, jaką system ma wykonać na skrzyżowaniu.
+
+Przykład:
+
+{
+
+  "commands": [
+
+    {
+
+      "type": "addVehicle",
+
+      "vehicleId": "vehicle1",
+
+      "startRoad": "south",
+
+      "endRoad": "north"
+
+    },
+
+    {
+
+      "type": "addVehicle",
+
+      "vehicleId": "vehicle2",
+
+      "startRoad": "north",
+
+      "endRoad": "south"
+
+    },
+
+    {
+
+      "type": "step"
+
+    },
+
+    {
+
+      "type": "step"
+
+    },
+
+    {
+
+      "type": "addVehicle",
+
+      "vehicleId": "vehicle3",
+
+      "startRoad": "west",
+
+      "endRoad": "south"
+
+    },
+
+    {
+
+      "type": "addVehicle",
+
+      "vehicleId": "vehicle4",
+
+      "startRoad": "west",
+
+      "endRoad": "south"
+
+    },
+
+    {
+
+      "type": "step"
+
+    },
+
+    {
+
+      "type": "step"
+
+    }
+
+  ]
+
+}
+
+
+Komenda addVehicle: dodaje pojazd na wskazanej drodze początkowej (startRoad) z celem dojazdu do drogi końcowej (endRoad).
+
+Komenda step: wykonuje krok symulacji, podczas którego przez skrzyżowanie przejeżdżają pierwsze pojazdy na drodze, która aktualnie ma zielone światło.
+
+Oczekiwanym wyjściem z symulacji jest JSON zawierający listę pojazdów, które opuściły skrzyżowanie po każdym kroku symulacji.
+
+{
+
+  "stepStatuses": [
+
+    {
+
+      "leftVehicles": [
+
+        "vehicle1", 
+
+        "vehicle2"
+
+      ]
+
+    },
+
+    {
+
+      "leftVehicles": []
+
+    },
+
+    {
+
+      "leftVehicles": [
+
+        "vehicle3"
+
+      ]
+
+    },
+
+    {
+
+      "leftVehicles": [
+
+        "vehicle4"
+
+      ]
+
+    }
+
+  ]
+
+}
+
+
+stepStatuses: zawiera listę statusów dla każdego kroku symulacji.
+
+leftVehicles: zawiera listę identyfikatorów pojazdów, które opuściły skrzyżowanie w danym kroku.
+
+Powyższy format danych jest wymagany.
+
+Inne wymagania / wskazówki:
+
+Symulacja powinna dać się wykonać za pomocą jednej komendy, przyjmującej plik wejściowy oraz określającej plik wyjściowy (przykładowo scala-cli simulation.sc input.json output.json)
+
+Wymaganym językiem implementacji jest Scala, Java, Kotlin lub TypeScript
+
+Można używać różnych języków i technologii, m.in. pod fullstackową aplikację.
+
+Zastanów się nad różnymi algorytmami dostosowywania świateł (np. opartymi na proporcjach, czasie oczekiwania)
+
+Kryteria oceny:
+
+Działanie systemu zgodnie z założeniami
+
+Działanie algorytmu opisane w readme
+
+Wydajność systemu
+
+Radzenie sobie systemu z różnymi scenariuszami ruchu
+
+Organizacja, czytelność i zrozumiałość kodu
+
+Pokrycie testami
+
+Implementacja dodatkowych funkcjonalności oraz innowacyjne podejście do rozwiązania problemu
+
+Proszę, prześlij nam rozwiązanie w postaci git bundle ("git bundle create imie_nazwisko.bundle master"). Jeżeli chcesz, możesz dodatkowo opublikować swoje rozwiązanie na GitHubie i przesłać nam link. Na zadanie przewidujemy tydzień, czyli do 10 marca włącznie, do końca dnia.
+
+Gdyby pojawiły się jakieś pytania/wątpliwości w zakresie treści zadania lub trafilibyśmy z deadlinem w naprawdę niekorzystny moment względem innych Twoich innych obowiązków – pisz śmiało! Nie ma problemu z wyjaśnieniem pewnych kwestii lub przesunięciem terminu oddania zadania.
+
+Powodzenia!🤞
+
+Natalia
+
+--
+Natalia Nowak-Wiśniowska
