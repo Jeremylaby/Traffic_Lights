@@ -2,7 +2,6 @@ package pl.jeremy.simulation.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.lang.reflect.Field;
@@ -440,15 +439,16 @@ public class PolishVehicleReleasePolicyTest {
         assertEquals(c.expectedLeftIds(), actualLeftIds, msg);
 
         // Also verify: every returned vehicle is actually removed from entrance lane (basic sanity)
-        for (RoadDirection d : c.greenRoads()) {
-            String id = idByRoad.get(d);
-            boolean shouldHaveLeft = actualLeftIds.contains(id);
-
-            boolean laneEmpty = crossroad.getRoad(d).getEntanceLane().isEmpty();
-            if (shouldHaveLeft) {
-                assertTrue(laneEmpty, "Returned as left but still on entrance lane. " + msg + " road=" + d);
-            }
-        }
+        // logic changed now it only pick Vehicles to remove
+        //        for (RoadDirection d : c.greenRoads()) {
+        //            String id = idByRoad.get(d);
+        //            boolean shouldHaveLeft = actualLeftIds.contains(id);
+        //
+        //            boolean laneEmpty = crossroad.getRoad(d).getEntanceLane().isEmpty();
+        //            if (shouldHaveLeft) {
+        //                assertTrue(laneEmpty, "Returned as left but still on entrance lane. " + msg + " road=" + d);
+        //            }
+        //        }
     }
 
     enum Move {
