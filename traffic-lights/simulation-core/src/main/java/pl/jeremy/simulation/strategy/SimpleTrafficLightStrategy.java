@@ -21,7 +21,7 @@ public class SimpleTrafficLightStrategy implements TrafficLightStrategy {
     }
 
     @Override
-    public void step(PolishCrossroad crossroad) {
+    public void advanceTrafficLights(PolishCrossroad crossroad) {
         crossroad.getRoads().values().stream()
                 .map(SingleLaneRoad::getTrafficLight)
                 .forEach(this::changeLights);

@@ -51,10 +51,10 @@ public class PolishCrossroad {
         }
     }
 
-    public void removeVehicle(Vehicle vehicle) {
+    public void poolFirstVehicle(Vehicle vehicle) {
         SingleLaneRoad road = getRoad(vehicle.getRoute().startRoad());
         if (road != null) {
-            road.getEntanceLane().removeVehicle();
+            road.getEntanceLane().poolFirstVehicle();
         }
     }
 }

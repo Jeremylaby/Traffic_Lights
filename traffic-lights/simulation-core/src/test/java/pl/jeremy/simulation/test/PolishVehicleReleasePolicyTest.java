@@ -24,9 +24,9 @@ import pl.jeremy.model.road.RoadDirection;
 import pl.jeremy.model.road.SingleLaneRoad;
 import pl.jeremy.model.trafficlights.TrafficLightState;
 import pl.jeremy.model.vehicle.Vehicle;
-import pl.jeremy.simulation.VehicleManager;
+import pl.jeremy.simulation.PolishVehicleReleasePolicy;
 
-public class VehicleManagerMoveVehiclesTest {
+public class PolishVehicleReleasePolicyTest {
 
     // =========================
     // Case definitions (EDIT ME)
@@ -342,14 +342,14 @@ public class VehicleManagerMoveVehiclesTest {
     // Core: invoke move + collect "left vehicles"
     // ==========================================
     private static Set<String> invokeMoveAndCollectLeft(
-            VehicleManager vm, PolishCrossroad crossroad, Map<RoadDirection, String> idByRoad) {
+            PolishVehicleReleasePolicy vm, PolishCrossroad crossroad, Map<RoadDirection, String> idByRoad) {
         // Snapshot (1 vehicle per green road => if lane becomes empty, that vehicle "left")
-        return vm.moveVehicles(crossroad).stream()
-                .map(VehicleManagerMoveVehiclesTest::vehicleId)
+        return vm.selectVehiclesToRelease(crossroad).stream()
+                .map(PolishVehicleReleasePolicyTest::vehicleId)
                 .collect(Collectors.toSet());
     }
 
-    private static Object invokeMove(VehicleManager vm, PolishCrossroad crossroad) {
+    private static Object invokeMove(PolishVehicleReleasePolicy vm, PolishCrossroad crossroad) {
         // supports both "moveVehicles" and (if you rename) "moveCars"
         for (String methodName : List.of("moveVehicles", "moveCars")) {
             try {
@@ -407,7 +407,7 @@ public class VehicleManagerMoveVehiclesTest {
 
     @ParameterizedTest(name = "{index} - {0}")
     @MethodSource("cases")
-    void moveVehiclesShouldReturnExpectedVehicles(String displayName, Case c) {
+    void selectVehiclesShouldReturnExpectedVehiclesToRelease(String displayName, Case c) {
         // Arrange
         PolishCrossroad crossroad = new PolishCrossroad();
         setLights(crossroad, c.greenRoads());
@@ -425,7 +425,7 @@ public class VehicleManagerMoveVehiclesTest {
             crossroad.addVehicle(v);
         }
 
-        VehicleManager vm = new VehicleManager();
+        PolishVehicleReleasePolicy vm = new PolishVehicleReleasePolicy();
 
         // Act
         Set<String> actualLeftIds = invokeMoveAndCollectLeft(vm, crossroad, idByRoad);

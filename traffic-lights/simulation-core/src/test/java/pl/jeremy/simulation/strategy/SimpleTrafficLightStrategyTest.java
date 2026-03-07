@@ -26,12 +26,12 @@ class SimpleTrafficLightStrategyTest {
     }
 
     @Test
-    void afterOneStepRedBecomesGreenArrowWhileGreenStaysGreen() {
+    void afterOneAdvanceTrafficLightsRedBecomesGreenArrowWhileGreenStaysGreen() {
         PolishCrossroad crossroad = new PolishCrossroad();
         SimpleTrafficLightStrategy strategy = new SimpleTrafficLightStrategy();
         strategy.configure(crossroad);
 
-        step(strategy, crossroad);
+        advanceTrafficLights(strategy, crossroad);
 
         // For RED lights: the strategy immediately advances them (RED -> next state).
         // For GREEN lights: they should remain GREEN until currentGreenTime reaches GREEN_TIME.
@@ -63,7 +63,7 @@ class SimpleTrafficLightStrategyTest {
     }
 
     @Test
-    void yellowAndRedYellowHoldForOneExtraStepThenAdvanceOnNextDueToSubstateCounter() {
+    void yellowAndRedYellowHoldForOneExtraAdvanceTrafficLightsThenAdvanceOnNextDueToSubstateCounter() {
         PolishCrossroad crossroad = new PolishCrossroad();
         SimpleTrafficLightStrategy strategy = new SimpleTrafficLightStrategy();
         strategy.configure(crossroad);
@@ -74,7 +74,7 @@ class SimpleTrafficLightStrategyTest {
         // Step 7:
         // currentSubstate is incremented after changeLights(), so at this point it's not yet >= SUBSTATE_TIME
         // for the checks inside changeLights(). Result: substates do NOT advance here.
-        step(strategy, crossroad);
+        advanceTrafficLights(strategy, crossroad);
         assertEquals(TrafficLightState.YELLOW, state(crossroad, RoadDirection.NORTH));
         assertEquals(TrafficLightState.YELLOW, state(crossroad, RoadDirection.SOUTH));
         assertEquals(TrafficLightState.RED_YELLOW, state(crossroad, RoadDirection.EAST));
@@ -84,7 +84,7 @@ class SimpleTrafficLightStrategyTest {
         // Now the internal counter makes currentSubstate >= SUBSTATE_TIME during changeLights(),
         // so substates advance:
         // YELLOW -> RED, RED_YELLOW -> GREEN
-        step(strategy, crossroad);
+        advanceTrafficLights(strategy, crossroad);
         assertEquals(TrafficLightState.RED, state(crossroad, RoadDirection.NORTH));
         assertEquals(TrafficLightState.RED, state(crossroad, RoadDirection.SOUTH));
         assertEquals(TrafficLightState.GREEN, state(crossroad, RoadDirection.EAST));
@@ -105,7 +105,7 @@ class SimpleTrafficLightStrategyTest {
         assertEquals(TrafficLightState.RED, state(crossroad, RoadDirection.SOUTH));
 
         // Next step: any RED light advances immediately (RED -> GREEN_ARROW)
-        step(strategy, crossroad);
+        advanceTrafficLights(strategy, crossroad);
 
         assertEquals(TrafficLightState.GREEN_ARROW, state(crossroad, RoadDirection.NORTH));
         assertEquals(TrafficLightState.GREEN_ARROW, state(crossroad, RoadDirection.SOUTH));
@@ -123,7 +123,7 @@ class SimpleTrafficLightStrategyTest {
         // Find when (and if) the light layout repeats.
         int stepsToRepeat = -1;
         for (int i = 1; i <= 100; i++) {
-            step(strategy, crossroad);
+            advanceTrafficLights(strategy, crossroad);
             if (snapshot(crossroad).equals(initial)) {
                 stepsToRepeat = i;
                 break;
@@ -158,7 +158,7 @@ class SimpleTrafficLightStrategyTest {
 
     private static void steps(SimpleTrafficLightStrategy strategy, PolishCrossroad crossroad, int n) {
         for (int i = 0; i < n; i++) {
-            step(strategy, crossroad);
+            advanceTrafficLights(strategy, crossroad);
         }
     }
 
@@ -166,9 +166,9 @@ class SimpleTrafficLightStrategyTest {
      * Helper that works whether your strategy currently has step(crossroad) or you later refactor it to step() (to
      * match the interface).
      */
-    private static void step(SimpleTrafficLightStrategy strategy, PolishCrossroad crossroad) {
+    private static void advanceTrafficLights(SimpleTrafficLightStrategy strategy, PolishCrossroad crossroad) {
         try {
-            Method m = strategy.getClass().getMethod("step", PolishCrossroad.class);
+            Method m = strategy.getClass().getMethod("advanceTrafficLights", PolishCrossroad.class);
             m.invoke(strategy, crossroad);
         } catch (NoSuchMethodException e) {
             // If you refactor to step() (no arguments), we still want the tests to work.

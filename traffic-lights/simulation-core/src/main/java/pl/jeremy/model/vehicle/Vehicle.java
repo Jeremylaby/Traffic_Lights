@@ -22,4 +22,5 @@ public class Vehicle {
     public VehicleRoute getRoute() {
         return route;
     }
+    // TODO: add some toString
 }

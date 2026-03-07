@@ -10,30 +10,43 @@ import pl.jeremy.model.road.RoadDirection;
 import pl.jeremy.model.road.SingleLaneRoad;
 import pl.jeremy.model.trafficlights.TrafficLightState;
 import pl.jeremy.model.vehicle.Vehicle;
+import pl.jeremy.simulation.util.ScoredCandidate;
 
-public class VehicleManager {
+public class PolishVehicleReleasePolicy implements VehicleReleasePolicy{
     /** I hope it works... */
     private boolean preferNorthSouthAxis = true;
 
-    public List<Vehicle> moveVehicles(PolishCrossroad crossroad) {
+    public List<Vehicle> selectVehiclesToRelease(PolishCrossroad crossroad) {
         // 1) Collect candidates = first vehicles from each GREEN approach (max 4)
-        List<Vehicle> waitingOnGreen = crossroad.getRoads().values().stream()
-                .filter(singleLaneRoad -> singleLaneRoad.getTrafficLight().getState() == TrafficLightState.GREEN)
-                .map(SingleLaneRoad::getEntanceLane)
-                .map(Lane::getFirstVehicle)
-                .filter(Objects::nonNull)
-                .toList();
-        List<Vehicle> waitingOnGreenArrow = crossroad.getRoads().values().stream()
-                .filter(singleLaneRoad -> singleLaneRoad.getTrafficLight().getState() == TrafficLightState.GREEN_ARROW)
-                .map(SingleLaneRoad::getEntanceLane)
-                .map(Lane::getFirstVehicle)
-                .filter(Objects::nonNull)
-                .filter(vehicle -> vehicle.getRoute().isRightTurn())
-                .toList();
+        List<Vehicle> waitingOnGreen = selectGreenCandidates(crossroad);
+        List<Vehicle> waitingOnGreenArrow = selectGreenArrowCandidates(crossroad);
         List<Vehicle> greenArrowNonConflicting = waitingOnGreenArrow.stream()
                 .filter(arrowVehicle -> waitingOnGreen.stream()
                         .noneMatch(greenVehicle -> arrowVehicle.getRoute().isColliding(greenVehicle.getRoute())))
                 .toList();
+        return resolveCandidates(waitingOnGreen, greenArrowNonConflicting);
+    }
+
+    private static List<Vehicle> selectGreenArrowCandidates(PolishCrossroad crossroad) {
+        return crossroad.getRoads().values().stream()
+                .filter(singleLaneRoad -> singleLaneRoad.getTrafficLight().getState() == TrafficLightState.GREEN_ARROW)
+                .map(SingleLaneRoad::getEntanceLane)
+                .map(Lane::peekFirstVehicle)
+                .filter(Objects::nonNull)
+                .filter(vehicle -> vehicle.getRoute().isRightTurn())
+                .toList();
+    }
+
+    private static List<Vehicle> selectGreenCandidates(PolishCrossroad crossroad) {
+        return crossroad.getRoads().values().stream()
+                .filter(singleLaneRoad -> singleLaneRoad.getTrafficLight().getState() == TrafficLightState.GREEN)
+                .map(SingleLaneRoad::getEntanceLane)
+                .map(Lane::peekFirstVehicle)
+                .filter(Objects::nonNull)
+                .toList();
+    }
+
+    private List<Vehicle> resolveCandidates(List<Vehicle> waitingOnGreen, List<Vehicle> greenArrowNonConflicting) {
         if (waitingOnGreen.isEmpty()) {
             return greenArrowNonConflicting;
         }
@@ -49,7 +62,6 @@ public class VehicleManager {
             left = waitingOnGreen;
         }
         left = Stream.concat(left.stream(), greenArrowNonConflicting.stream()).toList();
-        left.forEach(crossroad::removeVehicle);
         return left;
     }
 

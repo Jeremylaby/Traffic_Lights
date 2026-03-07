@@ -22,11 +22,11 @@ public class Lane {
         vehicles.offer(vehicle);
     }
 
-    public Vehicle removeVehicle() {
-        return vehicles.poll();
+    public void poolFirstVehicle() {
+        vehicles.poll();
     }
 
-    public Vehicle getFirstVehicle() {
+    public Vehicle peekFirstVehicle() {
         return vehicles.peek();
     }
 
