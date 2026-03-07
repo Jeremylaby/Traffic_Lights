@@ -12,7 +12,7 @@ import pl.jeremy.model.trafficlights.TrafficLightState;
 import pl.jeremy.model.vehicle.Vehicle;
 import pl.jeremy.simulation.util.ScoredCandidate;
 
-public class PolishVehicleReleasePolicy implements VehicleReleasePolicy{
+public class PolishVehicleReleasePolicy implements VehicleReleasePolicy {
     /** I hope it works... */
     private boolean preferNorthSouthAxis = true;
 
