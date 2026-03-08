@@ -8,28 +8,39 @@ import pl.jeremy.cli.dto.SimulationInputDto;
 import pl.jeremy.cli.io.JsonInputReader;
 import pl.jeremy.cli.io.JsonOutputWriter;
 import pl.jeremy.cli.io.SimulationStepLogger;
+import pl.jeremy.config.TrafficLightMode;
+import pl.jeremy.config.TrafficLightStrategyFactory;
 import pl.jeremy.model.vehicle.Vehicle;
 import pl.jeremy.simulation.CrossroadSimulation;
 import pl.jeremy.simulation.PolishVehicleReleasePolicy;
-import pl.jeremy.simulation.strategy.SimpleTrafficLightStrategy;
+import pl.jeremy.simulation.strategy.TrafficLightStrategy;
 import pl.jeremy.simulation.util.StepResult;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        if (args.length != 2) {
-            throw new IllegalArgumentException("Usage: <input.json> <output.json>");
+        if (args.length < 2 || args.length > 3) {
+            throw new IllegalArgumentException("Usage: <input.json> <output.json> [SIMPLE|BROKEN]");
         }
 
         Path inputPath = Path.of(args[0]);
         Path outputPath = Path.of(args[1]);
+        TrafficLightMode mode = args.length == 3 ? TrafficLightMode.from(args[2]) : TrafficLightMode.SIMPLE;
         SimulationStepLogger stepLogger = new SimulationStepLogger();
         JsonInputReader inputReader = new JsonInputReader();
         JsonOutputWriter outputWriter = new JsonOutputWriter();
 
         SimulationInputDto input = inputReader.read(inputPath);
+        System.out.println("Running simulation with mode: " + mode);
+        TrafficLightStrategy trafficLightStrategy = TrafficLightStrategyFactory.create(mode);
+        List<StepResult> stepResults = getStepResults(trafficLightStrategy, input, stepLogger);
 
+        outputWriter.write(outputPath, stepResults);
+    }
+
+    private static List<StepResult> getStepResults(
+            TrafficLightStrategy trafficLightStrategy, SimulationInputDto input, SimulationStepLogger stepLogger) {
         CrossroadSimulation simulation =
-                new CrossroadSimulation(new SimpleTrafficLightStrategy(), new PolishVehicleReleasePolicy());
+                new CrossroadSimulation(trafficLightStrategy, new PolishVehicleReleasePolicy());
 
         List<StepResult> stepResults = new ArrayList<>();
 
@@ -48,7 +59,6 @@ public class Main {
                 default -> throw new IllegalArgumentException("Unknown command type: " + command.type());
             }
         }
-
-        outputWriter.write(outputPath, stepResults);
+        return stepResults;
     }
 }

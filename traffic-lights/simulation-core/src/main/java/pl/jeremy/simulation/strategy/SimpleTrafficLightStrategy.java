@@ -11,7 +11,10 @@ public class SimpleTrafficLightStrategy implements TrafficLightStrategy {
     private static final int SUBSTATE_TIME = 1;
     private int currentGreenTime = 0;
     private int currentSubstate = 0;
-
+    /**
+     * Simulates a simple fixed-time traffic light controller. Each axis is served using constant green and transition
+     * times, without adapting to current queue lengths.
+     */
     @Override
     public void configure(PolishCrossroad crossroad) {
         crossroad.getRoad(RoadDirection.NORTH).getTrafficLight().setState(TrafficLightState.GREEN);
