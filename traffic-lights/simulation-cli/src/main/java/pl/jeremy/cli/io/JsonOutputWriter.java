@@ -15,7 +15,7 @@ public class JsonOutputWriter {
         this.objectMapper = new ObjectMapper();
     }
 
-    public void write(Path outputPath, SimulationOutputDto output) throws IOException {
+    private void write(Path outputPath, SimulationOutputDto output) throws IOException {
         objectMapper.writerWithDefaultPrettyPrinter().writeValue(outputPath.toFile(), output);
     }
 
@@ -23,7 +23,6 @@ public class JsonOutputWriter {
         List<StepStatusDto> statuses = stepResults.stream()
                 .map(stepResult -> new StepStatusDto(stepResult.leftVehicleIds()))
                 .toList();
-
         write(outputPath, new SimulationOutputDto(statuses));
     }
 }
