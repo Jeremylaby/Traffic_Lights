@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.util.List;
 import pl.jeremy.cli.dto.SimulationOutputDto;
 import pl.jeremy.cli.dto.StepStatusDto;
+import pl.jeremy.model.vehicle.VehicleDto;
 import pl.jeremy.simulation.util.StepResult;
 
 public class JsonOutputWriter {
@@ -21,7 +22,9 @@ public class JsonOutputWriter {
 
     public void write(Path outputPath, List<StepResult> stepResults) throws IOException {
         List<StepStatusDto> statuses = stepResults.stream()
-                .map(stepResult -> new StepStatusDto(stepResult.leftVehicleIds()))
+                .map(stepResult -> new StepStatusDto(stepResult.leftVehicles().stream()
+                        .map(VehicleDto::vehicleId)
+                        .toList()))
                 .toList();
         write(outputPath, new SimulationOutputDto(statuses));
     }

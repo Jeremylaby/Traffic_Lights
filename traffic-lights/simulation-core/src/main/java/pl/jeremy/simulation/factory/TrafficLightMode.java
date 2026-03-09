@@ -1,4 +1,4 @@
-package pl.jeremy.config;
+package pl.jeremy.simulation.factory;
 
 public enum TrafficLightMode {
     SIMPLE,
