@@ -1,5 +1,6 @@
 package pl.jeremy.simulation;
 
+import java.util.Comparator;
 import java.util.List;
 import pl.jeremy.model.crossroad.CrossroadDto;
 import pl.jeremy.model.crossroad.PolishCrossroad;
@@ -35,8 +36,10 @@ public final class CrossroadSimulation {
     public StepResult step() {
         List<Vehicle> released = vehicleReleasePolicy.selectVehiclesToRelease(crossroad);
         released.forEach(crossroad::poolFirstVehicle);
-        List<VehicleDto> releasedIds =
-                released.stream().map(VehicleDto::from).sorted().toList();
+        List<VehicleDto> releasedIds = released.stream()
+                .map(VehicleDto::from)
+                .sorted(Comparator.comparing(VehicleDto::vehicleId))
+                .toList();
 
         trafficLightStrategy.advanceTrafficLights(crossroad);
 

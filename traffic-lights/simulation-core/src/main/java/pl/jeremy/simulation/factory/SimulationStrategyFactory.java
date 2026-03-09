@@ -1,6 +1,8 @@
 package pl.jeremy.simulation.factory;
 
 import pl.jeremy.simulation.CrossroadSimulation;
+import pl.jeremy.simulation.PolishVehicleReleasePolicy;
+import pl.jeremy.simulation.strategy.AdaptiveTrafficLightStrategy;
 import pl.jeremy.simulation.strategy.BrokenTrafficLightStrategy;
 import pl.jeremy.simulation.strategy.FeedbackControlTrafficLightStrategy;
 import pl.jeremy.simulation.strategy.ProportionalAllocationTrafficLightStrategy;
