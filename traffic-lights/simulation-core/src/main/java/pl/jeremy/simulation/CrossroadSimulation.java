@@ -1,10 +1,11 @@
 package pl.jeremy.simulation;
 
 import java.util.List;
+import pl.jeremy.model.crossroad.CrossroadDto;
 import pl.jeremy.model.crossroad.PolishCrossroad;
 import pl.jeremy.model.vehicle.Vehicle;
+import pl.jeremy.model.vehicle.VehicleDto;
 import pl.jeremy.simulation.strategy.TrafficLightStrategy;
-import pl.jeremy.simulation.util.SimulationSnapshot;
 import pl.jeremy.simulation.util.StepResult;
 
 public final class CrossroadSimulation {
@@ -34,18 +35,18 @@ public final class CrossroadSimulation {
     public StepResult step() {
         List<Vehicle> released = vehicleReleasePolicy.selectVehiclesToRelease(crossroad);
         released.forEach(crossroad::poolFirstVehicle);
-        List<String> releasedIds =
-                released.stream().map(Vehicle::getId).sorted().toList();
+        List<VehicleDto> releasedIds =
+                released.stream().map(VehicleDto::from).sorted().toList();
 
         trafficLightStrategy.advanceTrafficLights(crossroad);
 
-        StepResult result = new StepResult(stepNumber, releasedIds, snapshot());
+        StepResult result = new StepResult(releasedIds, snapshot());
 
         stepNumber++;
         return result;
     }
 
     public SimulationSnapshot snapshot() {
-        return SimulationSnapshot.from(crossroad);
+        return new SimulationSnapshot(stepNumber, CrossroadDto.from(crossroad));
     }
 }
