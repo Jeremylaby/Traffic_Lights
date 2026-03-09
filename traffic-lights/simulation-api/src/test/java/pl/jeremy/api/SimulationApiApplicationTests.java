@@ -1,4 +1,4 @@
-package pl.jeremy.simulationapi;
+package pl.jeremy.api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -7,7 +7,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 class SimulationApiApplicationTests {
 
     @Test
-    void contextLoads() {
-    }
-
+    void contextLoads() {}
 }

@@ -1,4 +1,4 @@
-package pl.jeremy.simulationapi;
+package pl.jeremy.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,8 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SimulationApiApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SimulationApiApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(SimulationApiApplication.class, args);
+    }
 }
