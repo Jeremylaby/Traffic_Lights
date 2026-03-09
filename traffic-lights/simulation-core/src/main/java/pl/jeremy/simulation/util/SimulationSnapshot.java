@@ -1,5 +1,6 @@
 package pl.jeremy.simulation.util;
 
+import pl.jeremy.model.crossroad.CrossroadDto;
 import pl.jeremy.model.crossroad.PolishCrossroad;
 import pl.jeremy.model.road.RoadDirection;
 
@@ -11,7 +12,8 @@ public record SimulationSnapshot(
         String northLight,
         String southLight,
         String eastLight,
-        String westLight) {
+        String westLight,
+        CrossroadDto crossroad) {
     public static SimulationSnapshot from(PolishCrossroad crossroad) {
         return new SimulationSnapshot(
                 crossroad.getRoad(RoadDirection.NORTH).getEntanceLane().getVehicleCount(),
@@ -37,6 +39,7 @@ public record SimulationSnapshot(
                         .getRoad(RoadDirection.WEST)
                         .getTrafficLight()
                         .getState()
-                        .name());
+                        .name(),
+                CrossroadDto.from(crossroad));
     }
 }

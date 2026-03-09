@@ -32,6 +32,6 @@ public final class SimulationStepLogger {
                         s.southQueue(),
                         s.eastQueue(),
                         s.westQueue(),
-                        stepResult.leftVehicleIds());
+                        stepResult.leftVehicles());
     }
 }
