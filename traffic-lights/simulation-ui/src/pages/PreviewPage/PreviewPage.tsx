@@ -1,8 +1,8 @@
 
-import styled from 'styled-components';
 import type {TrafficLightState} from "@/types/simulation.ts";
 import TrafficLight from "@/components/crossroad/TrafficLight/TrafficLight.tsx";
-
+import {VehicleQueue} from "@/components/crossroad/VehicleQueue/VehicleQueue.tsx";
+import {Title, Row, Cell, Label, Page} from "./PreviewPage.style.ts";
 const STATES: TrafficLightState[] = [
     'RED',
     'RED_YELLOW',
@@ -11,45 +11,6 @@ const STATES: TrafficLightState[] = [
     'YELLOW',
 ];
 
-const Page = styled.div`
-    background: #111;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px;
-    gap: 40px;
-    font-family: monospace;
-    color: #fff;
-`;
-
-const Title = styled.h1`
-    color: #aaa;
-    font-size: 14px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin: 0;
-`;
-
-const Row = styled.div`
-    display: flex;
-    gap: 40px;
-    align-items: flex-end;
-`;
-
-const Cell = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-`;
-
-const Label = styled.span`
-    font-size: 11px;
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-`;
 
 const PreviewPage = ()=> {
     return (
@@ -91,6 +52,20 @@ const PreviewPage = ()=> {
                         <Label>{state}</Label>
                     </Cell>
                 ))}
+            </Row>
+            <Row>
+            <svg width={200} height={200} overflow="visible">
+                <VehicleQueue
+                    vehicles={[
+                        { vehicleId: 'v1', startRoad: 'SOUTH', endRoad: 'NORTH', movement: 'STRAIGHT' },
+                        { vehicleId: 'v2', startRoad: 'SOUTH', endRoad: 'EAST',  movement: 'LEFT' },
+                        { vehicleId: 'v3', startRoad: 'SOUTH', endRoad: 'WEST',  movement: 'RIGHT' },
+                        { vehicleId: 'v4', startRoad: 'SOUTH', endRoad: 'NORTH', movement: 'STRAIGHT' },
+                        { vehicleId: 'v5', startRoad: 'SOUTH', endRoad: 'NORTH', movement: 'STRAIGHT' },
+                        { vehicleId: 'v6', startRoad: 'SOUTH', endRoad: 'NORTH', movement: 'STRAIGHT' },
+                    ]}
+                />
+            </svg>
             </Row>
         </Page>
     );
