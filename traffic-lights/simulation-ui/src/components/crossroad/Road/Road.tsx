@@ -13,11 +13,12 @@ interface RoadProps {
     vehicles: VehicleDto[];
     x: number;
     y: number;
+    vehiclesOnly?: boolean;  // ← jedyna zmiana w typie
 }
 
 
+export function Road({ direction, vehicles, x, y, vehiclesOnly = false }: RoadProps) {
 
-export function Road({ direction, vehicles, x, y }: RoadProps) {
     const roadRotation    = ROAD_ROTATIONS[direction];
     const counterRotation = -roadRotation;
 
@@ -43,21 +44,21 @@ export function Road({ direction, vehicles, x, y }: RoadProps) {
         <RoadContext.Provider value={{ direction, roadRotation }}>
             <g transform={`rotate(${roadRotation}, ${cx}, ${cy})`}>
                 <g transform={`translate(${x}, ${y})`}>
-                    <rect
+                    {!vehiclesOnly && <><rect
                         x={0} y={0}
                         width={roadW} height={roadH}
                         fill={ASPHALT} stroke={ROAD_BORDER} strokeWidth={1}
                     />
 
-                    <DashedLine x1={LANE_WIDTH} y1={0} x2={LANE_WIDTH} y2={roadH} />
+                        <DashedLine x1={LANE_WIDTH} y1={0} x2={LANE_WIDTH} y2={roadH}/>
 
-                    {arrows.map((arrow, i) => (
-                        <LaneArrow
-                            key={i}
-                            {...arrow}
-                            counterRotation={counterRotation}
-                        />
-                    ))}
+                {arrows.map((arrow, i) => (
+                <LaneArrow
+                    key={i}
+                    {...arrow}
+                    counterRotation={counterRotation}
+                />
+                ))}</>}
 
                     <g transform={`translate(${queueX}, ${queueY})`}>
                         <VehicleQueue vehicles={vehicles} />

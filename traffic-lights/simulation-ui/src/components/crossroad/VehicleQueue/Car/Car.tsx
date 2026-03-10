@@ -1,9 +1,10 @@
 import { useMemo } from 'react';
-import { BLINKER_COLOR, CAR_H, CAR_W, randomCarColor } from '../config.ts';
+import { BLINKER_COLOR, CAR_H, CAR_W} from '../config.ts';
 import type { Movement } from '@/types/simulation.ts';
 import CarIcon from '@/components/crossroad/VehicleQueue/Car/CarIcon.tsx';
 import { BlinkerDot } from '@/components/crossroad/VehicleQueue/Car/Car.style.ts';
 import { useRoad } from '@/components/crossroad/Road/RoadContext.ts';
+import {randomCarColor} from "./util.ts";
 
 interface CarProps {
     x: number;

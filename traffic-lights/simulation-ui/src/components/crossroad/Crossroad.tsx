@@ -36,18 +36,16 @@ export function Crossroad({north, south, east, west, broken = false}: CrossroadP
                 strokeWidth={1}
             />
 
-            {ROAD_CONFIGS.map(({direction, x, y}) => {
-                const {waitingVehicles} = roadMap[direction];
-                return (
-                    <Road
-                        key={direction}
-                        direction={direction}
-                        vehicles={waitingVehicles}
-                        x={x}
-                        y={y}
-                    />
-                );
-            })}
+            {/* Przebieg 1 — drogi bez kolejek */}
+            {ROAD_CONFIGS.map(({direction, x, y}) => (
+                <Road key={direction} direction={direction} vehicles={[]} x={x} y={y}/>
+            ))}
+
+            {/* Przebieg 2 — tylko kolejki, na wierzchu */}
+            {ROAD_CONFIGS.map(({direction, x, y}) => (
+                <Road key={`v-${direction}`} direction={direction} vehicles={roadMap[direction].waitingVehicles} x={x}
+                      y={y} vehiclesOnly/>
+            ))}
 
             {TRAFFIC_LIGHT_CONFIGS.map(({direction, x, y, rotation}) => {
                 const {trafficLightState} = roadMap[direction];
@@ -61,6 +59,7 @@ export function Crossroad({north, south, east, west, broken = false}: CrossroadP
                     </g>
                 );
             })}
+
         </svg>
     );
 }
