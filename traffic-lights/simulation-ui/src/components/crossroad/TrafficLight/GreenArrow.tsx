@@ -1,4 +1,4 @@
-import {DIM} from "./config.ts";
+import {DIM, GREEN_ARROW_SIZE} from "./config.ts";
 
 interface GreenArrowProps {
     x: number;
@@ -9,8 +9,8 @@ interface GreenArrowProps {
 const GreenArrow = ({ active, x, y, }: GreenArrowProps) => {
 
     const color = active ? '#4ade80' : DIM;
-    const panelW = 20;
-    const panelH = 20;
+    const panelW = GREEN_ARROW_SIZE;
+    const panelH = GREEN_ARROW_SIZE;
     const cx = x + panelW / 2;
     const cy = y + panelH / 2;
 
@@ -30,8 +30,6 @@ const GreenArrow = ({ active, x, y, }: GreenArrowProps) => {
                 x={x} y={y} width={panelW} height={panelH} rx={3} ry={3}
                 fill="#1a1a1a" stroke="#444" strokeWidth={1}
             />
-
-            {/* Arrow shaft */}
             <line
                 x1={shaftX1}
                 y1={shaftY}
@@ -41,8 +39,6 @@ const GreenArrow = ({ active, x, y, }: GreenArrowProps) => {
                 strokeWidth={2}
                 strokeLinecap="round"
             />
-
-            {/* Arrowhead */}
             <polygon points={headPoints} fill={color} />
         </g>
     );

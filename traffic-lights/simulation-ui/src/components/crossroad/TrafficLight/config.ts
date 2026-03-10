@@ -14,3 +14,5 @@ export const LIGHT_CONFIG: Record<
     GREEN:       { red: DIM,       yellow: DIM,       green: GREEN_COLOR, arrowActive: false },
     YELLOW:      { red: DIM,       yellow: YELLOW_COLOR, green: DIM,       arrowActive: false },
 };
+
+export const GREEN_ARROW_SIZE = 20
