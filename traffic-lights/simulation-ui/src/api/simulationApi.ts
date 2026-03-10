@@ -8,7 +8,7 @@ import type {
 } from './types';
 import type {TrafficLightMode} from "../types/simulation.ts";
 
-const BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:8080/api';
+const BASE_URL = import.meta.env.VITE_API_URL ;
 
 async function request<T>(
     path: string,
@@ -38,7 +38,7 @@ export function isApiError(e: unknown): e is ApiError {
 
 export const simulationApi = {
     getModes(): Promise<TrafficLightMode[]> {
-        return request<TrafficLightMode[]>('/modes');
+        return request<TrafficLightMode[]>('/api/modes');
     },
     createSimulation(strategy: TrafficLightMode): Promise<CreateSimulationResponse> {
         const body: CreateSimulationRequest = { strategy };
@@ -48,10 +48,10 @@ export const simulationApi = {
         });
     },
     getState(simulationId: string): Promise<SimulationStateResponse> {
-        return request<SimulationStateResponse>(`/simulations/${simulationId}`);
+        return request<SimulationStateResponse>(`/api/simulations/${simulationId}`);
     },
     step(simulationId: string): Promise<StepResponse> {
-        return request<StepResponse>(`/simulations/${simulationId}/step`, {
+        return request<StepResponse>(`/api/simulations/${simulationId}/step`, {
             method: 'POST',
         });
     },
@@ -59,13 +59,13 @@ export const simulationApi = {
         simulationId: string,
         vehicle: AddVehicleRequest,
     ): Promise<SimulationStateResponse> {
-        return request<SimulationStateResponse>(`/simulations/${simulationId}/vehicles`, {
+        return request<SimulationStateResponse>(`/api/simulations/${simulationId}/vehicles`, {
             method: 'POST',
             body: JSON.stringify(vehicle),
         });
     },
     deleteSimulation(simulationId: string): Promise<void> {
-        return request<void>(`/simulations/${simulationId}`, {
+        return request<void>(`/api/simulations/${simulationId}`, {
             method: 'DELETE',
         });
     },

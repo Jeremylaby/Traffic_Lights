@@ -1,4 +1,5 @@
-import type { SimulationStateResponse, VehicleDto } from '../api/types';
+import type {SimulationStateResponse} from '../api/types';
+import type {VehicleDto} from "@/types/simulation.ts";
 
 export interface StepLogEntry {
     stepNumber: number;
