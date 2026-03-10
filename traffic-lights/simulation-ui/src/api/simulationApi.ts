@@ -42,7 +42,7 @@ export const simulationApi = {
     },
     createSimulation(strategy: TrafficLightMode): Promise<CreateSimulationResponse> {
         const body: CreateSimulationRequest = { strategy };
-        return request<CreateSimulationResponse>('/simulations', {
+        return request<CreateSimulationResponse>('/api/simulations', {
             method: 'POST',
             body: JSON.stringify(body),
         });
