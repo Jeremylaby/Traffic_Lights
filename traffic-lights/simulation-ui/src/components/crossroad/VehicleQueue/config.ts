@@ -11,11 +11,8 @@ export const CAR_GAP = 6;
 export const BLINKER_COLOR = '#f59e0b';
 
 
-
 export const ARC_N = 5;
 export const LINE_N = 5;
-
-
 
 
 export const EXIT_DURATION: Record<Movement, number> = {

@@ -1,23 +1,45 @@
-import {useEffect, useCallback, useMemo} from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { Crossroad } from '@/components/crossroad/Crossroad.tsx';
-import { useSimulation } from '@/hooks/useSimulation.ts';
+import {useCallback, useEffect, useMemo} from 'react';
+import {useLocation, useNavigate} from 'react-router-dom';
+import {Crossroad} from '@/components/crossroad/Crossroad.tsx';
+import {useSimulation} from '@/hooks/useSimulation.ts';
 import type {TrafficLightMode, TrafficLightState} from '@/types/simulation.ts';
 
 import {
+    BackBtn,
+    CanvasArea,
+    CanvasFrame,
+    CtrlBtn,
+    CtrlSep,
+    EmptyState,
+    ErrorMsg,
+    Footer,
+    GlobalStyle,
     GridBg,
-    GlobalStyle, Root,
-    BackBtn, ErrorMsg,
     Header,
     HeaderLabel,
     HeaderLeft,
     HeaderMode,
-    HeaderTitle, Main, ModeTag,
-    QueueDir, QueueItem, QueueTop, Sidebar, SidebarLabel, SidebarSection, StepCounter, StepNum, StepOf, QueueBar,
-    QueueFill, QueueCount, LogEntry, CanvasArea, CanvasFrame, EmptyState, LoadingDot, Footer, CtrlBtn, CtrlSep, StepBtn
+    HeaderTitle,
+    LoadingDot,
+    LogEntry,
+    Main,
+    ModeTag,
+    QueueBar,
+    QueueCount,
+    QueueDir,
+    QueueFill,
+    QueueItem,
+    QueueTop,
+    Root,
+    Sidebar,
+    SidebarLabel,
+    SidebarSection,
+    StepBtn,
+    StepCounter,
+    StepNum,
+    StepOf
 } from "./SimulationPage.style.ts";
 import AddVehiclePanel from "./components/AddVehiclePanel.tsx";
-
 
 
 interface LocationState {
@@ -26,21 +48,19 @@ interface LocationState {
 
 
 const LIGHT_LABEL: Record<TrafficLightState, string> = {
-    GREEN:       'GRN',
-    RED:         'RED',
-    YELLOW:      'YEL',
-    RED_YELLOW:  'R+Y',
+    GREEN: 'GRN',
+    RED: 'RED',
+    YELLOW: 'YEL',
+    RED_YELLOW: 'R+Y',
     GREEN_ARROW: 'GRN↗',
 };
 
 const pad = (n: number) => String(n).padStart(2, '0');
 
 
-
 const SimulationPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
-
 
 
     const mode = useMemo(
@@ -78,9 +98,9 @@ const SimulationPage = () => {
 
     return (
         <>
-            <GlobalStyle />
+            <GlobalStyle/>
             <Root>
-                <GridBg />
+                <GridBg/>
 
                 <Header>
                     <HeaderLeft>
@@ -113,17 +133,17 @@ const SimulationPage = () => {
                                     const road = crossroad[`${dir.toLowerCase()}Road` as keyof typeof crossroad];
                                     const light = road.trafficLightState;
                                     const count = road.queueSize;
-                                    const pct   = Math.min(count / 5, 1) * 100;
-                                    const high  = count > 3;
+                                    const pct = Math.min(count / 5, 1) * 100;
+                                    const high = count > 3;
 
                                     return (
                                         <QueueItem key={dir}>
                                             <QueueTop>
                                                 <QueueDir>{dir}</QueueDir>
-                                                    {LIGHT_LABEL[light]}
+                                                {LIGHT_LABEL[light]}
                                             </QueueTop>
                                             <QueueBar>
-                                                <QueueFill $pct={pct} $high={high} />
+                                                <QueueFill $pct={pct} $high={high}/>
                                             </QueueBar>
                                             <QueueCount $high={high}>
                                                 {count} vehicle{count !== 1 ? 's' : ''}
@@ -131,7 +151,7 @@ const SimulationPage = () => {
                                         </QueueItem>
                                     );
                                 })
-                                : <QueueDir style={{ color: '#2A2A38', fontSize: '11px' }}>
+                                : <QueueDir style={{color: '#2A2A38', fontSize: '11px'}}>
                                     Initializing...
                                 </QueueDir>
                             }
@@ -189,7 +209,7 @@ const SimulationPage = () => {
                         ↺
                     </CtrlBtn>
 
-                    <CtrlSep />
+                    <CtrlSep/>
 
                     <StepBtn
                         onClick={step}

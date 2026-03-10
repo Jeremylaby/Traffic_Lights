@@ -1,9 +1,9 @@
-import { useMemo } from 'react';
-import { BLINKER_COLOR, CAR_H, CAR_W} from '../config.ts';
-import type { Movement } from '@/types/simulation.ts';
+import {useMemo} from 'react';
+import {BLINKER_COLOR, CAR_H, CAR_W} from '../config.ts';
+import type {Movement} from '@/types/simulation.ts';
 import CarIcon from '@/components/crossroad/VehicleQueue/Car/CarIcon.tsx';
-import { BlinkerDot } from '@/components/crossroad/VehicleQueue/Car/Car.style.ts';
-import { useRoad } from '@/components/crossroad/Road/RoadContext.ts';
+import {BlinkerDot} from '@/components/crossroad/VehicleQueue/Car/Car.style.ts';
+import {useRoad} from '@/components/crossroad/Road/RoadContext.ts';
 import {randomCarColor} from "./util.ts";
 
 interface CarProps {
@@ -13,9 +13,9 @@ interface CarProps {
     movement: Movement;
 }
 
-const Car = ({ x, y, vehicleId, movement }: CarProps) => {
-    const { roadRotation } = useRoad();
-    const color  = useMemo(() => randomCarColor(), []);
+const Car = ({x, y, vehicleId, movement}: CarProps) => {
+    const {roadRotation} = useRoad();
+    const color = useMemo(() => randomCarColor(), []);
     const active = movement !== 'STRAIGHT';
 
     const blinkerCx = movement === 'RIGHT' ? CAR_W * 0.65 : CAR_W * 0.35;
@@ -25,7 +25,7 @@ const Car = ({ x, y, vehicleId, movement }: CarProps) => {
     return (
         <g transform={`translate(${x}, ${y})`}>
             <g transform={`rotate(${carIconRotation}, ${CAR_W / 2}, ${CAR_H / 2})`}>
-                <CarIcon fill={color.fill} stroke={color.stroke} width={CAR_W} height={CAR_H} />
+                <CarIcon fill={color.fill} stroke={color.stroke} width={CAR_W} height={CAR_H}/>
                 {active && (
                     <BlinkerDot
                         $active={active}

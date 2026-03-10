@@ -9,20 +9,20 @@ function roadLength(vehicleCount: number): number {
 
 export function svgSize(dir: RoadDirection, vehicleCount: number): { w: number; h: number } {
     const length = roadLength(vehicleCount);
-    const pad    = 20;
+    const pad = 20;
     const isVertical = dir === 'NORTH' || dir === 'SOUTH';
     return isVertical
-        ? { w: ROAD_WIDTH + pad * 2, h: length + pad * 2 }
-        : { w: length  + pad * 2,   h: ROAD_WIDTH + pad * 2 };
+        ? {w: ROAD_WIDTH + pad * 2, h: length + pad * 2}
+        : {w: length + pad * 2, h: ROAD_WIDTH + pad * 2};
 }
 
 export function roadOrigin(dir: RoadDirection, vehicleCount: number): { x: number; y: number } {
     const length = roadLength(vehicleCount);
-    const pad    = 20;
+    const pad = 20;
     const isVertical = dir === 'NORTH' || dir === 'SOUTH';
 
     if (isVertical) {
-        return { x: pad, y: pad };
+        return {x: pad, y: pad};
     }
     const svgCx = (length + pad * 2) / 2;
     const svgCy = (ROAD_WIDTH + pad * 2) / 2;
@@ -35,10 +35,10 @@ export function roadOrigin(dir: RoadDirection, vehicleCount: number): { x: numbe
 export function mockVehicles(dir: RoadDirection, count: number): VehicleDto[] {
     const movements = ['STRAIGHT', 'LEFT', 'RIGHT', 'STRAIGHT', 'STRAIGHT', 'STRAIGHT', 'LEFT'] as const;
     const ends: RoadDirection[] = ['NORTH', 'EAST', 'WEST', 'SOUTH', 'NORTH', 'EAST', 'WEST'];
-    return Array.from({ length: count }, (_, i) => ({
+    return Array.from({length: count}, (_, i) => ({
         vehicleId: `v${i + 1}`,
         startRoad: dir,
-        endRoad:   ends[i % ends.length],
-        movement:  movements[i % movements.length],
+        endRoad: ends[i % ends.length],
+        movement: movements[i % movements.length],
     }));
 }

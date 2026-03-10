@@ -1,4 +1,3 @@
-
 export type RoadDirection = 'NORTH' | 'SOUTH' | 'EAST' | 'WEST';
 
 export type TrafficLightState =

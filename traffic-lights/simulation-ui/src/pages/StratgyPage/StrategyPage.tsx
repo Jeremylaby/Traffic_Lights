@@ -27,10 +27,6 @@ import {
 import {MODES, RISK_COLOR} from "./config.ts";
 
 
-
-
-
-
 const StrategyPage = () => {
     const [selected, setSelected] = useState<TrafficLightMode | null>(null);
     const navigate = useNavigate();

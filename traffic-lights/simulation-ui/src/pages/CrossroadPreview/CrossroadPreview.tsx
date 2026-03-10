@@ -1,25 +1,36 @@
-import { useState } from 'react';
-import { Crossroad } from '@/components/crossroad/Crossroad.tsx';
+import {useState} from 'react';
+import {Crossroad} from '@/components/crossroad/Crossroad.tsx';
 
 import type {CrossroadDto, RoadDirection} from '@/types/simulation.ts';
 import {
     CrossroadBox,
-    DataPanel, EmptyNote, LightBadge,
+    DataPanel,
+    EmptyNote,
+    LightBadge,
     Main,
-    MockHint, MoveBadge,
+    MockHint,
+    MoveBadge,
     Page,
-    PageTitle, PanelTitle,
-    RoadCard, RoadCardHeader, RoadName, SourceBox,
-    SourceCode, SourceTitle, StepBar,
-    StepBtn, StepCounter,
+    PageTitle,
+    PanelTitle,
+    RoadCard,
+    RoadCardHeader,
+    RoadName,
+    SourceBox,
+    SourceCode,
+    SourceTitle,
+    StepBar,
+    StepBtn,
+    StepCounter,
     SystemLabel,
     TopBar,
-    TopLeft, VehicleArrow, VehicleEnd, VehicleId,
+    TopLeft,
+    VehicleArrow,
+    VehicleEnd,
+    VehicleId,
     VehicleRow
 } from "./CrossroadPreview.style.ts";
 import {CROSSROAD_STEPS} from "./mock.ts";
-
-
 
 
 const ALL_DIRECTIONS: RoadDirection[] = ['NORTH', 'SOUTH', 'EAST', 'WEST'];
@@ -27,8 +38,8 @@ const ALL_DIRECTIONS: RoadDirection[] = ['NORTH', 'SOUTH', 'EAST', 'WEST'];
 const DIR_KEY: Record<RoadDirection, keyof CrossroadDto> = {
     NORTH: 'northRoad',
     SOUTH: 'southRoad',
-    EAST:  'eastRoad',
-    WEST:  'westRoad',
+    EAST: 'eastRoad',
+    WEST: 'westRoad',
 };
 
 
@@ -36,7 +47,7 @@ const CrossroadPreview = () => {
     const [stepIndex, setStepIndex] = useState(0);
 
     const total = CROSSROAD_STEPS.length;
-    const mock  = CROSSROAD_STEPS[stepIndex];
+    const mock = CROSSROAD_STEPS[stepIndex];
 
     return (
         <Page>
@@ -67,7 +78,7 @@ const CrossroadPreview = () => {
                         south={mock.southRoad}
                         east={mock.eastRoad}
                         west={mock.westRoad}
-                        broken={stepIndex <2}
+                        broken={stepIndex < 2}
                     />
                     <MockHint>step {stepIndex + 1} of {total} — edit CROSSROAD_STEPS in mock.ts</MockHint>
                 </CrossroadBox>

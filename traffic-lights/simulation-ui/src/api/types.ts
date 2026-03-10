@@ -37,4 +37,5 @@ export type ApiError = {
 
 type ApiErrorBody = {
     status: number;
-    detail?: string };
+    detail?: string
+};

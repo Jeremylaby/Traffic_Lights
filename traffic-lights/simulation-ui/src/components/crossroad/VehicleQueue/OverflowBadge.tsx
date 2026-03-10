@@ -2,7 +2,8 @@ interface OverflowBadgeProps {
     count: number;
 
 }
-const OverflowBadge = ({ count }: OverflowBadgeProps) => {
+
+const OverflowBadge = ({count}: OverflowBadgeProps) => {
     return (
         <g>
             <rect x={-14} y={-10} width={28} height={16} rx={4} fill="#1e293b" stroke="#475569" strokeWidth={0.8}/>

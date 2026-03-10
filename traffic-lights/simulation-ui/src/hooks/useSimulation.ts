@@ -1,9 +1,6 @@
-import { useCallback, useState } from 'react';
-import { simulationApi } from '../api/simulationApi';
-import type {
-    AddVehicleRequest,
-} from '../api/types';
-import { isApiError } from '../api/simulationApi';
+import {useCallback, useState} from 'react';
+import {isApiError, simulationApi} from '../api/simulationApi';
+import type {AddVehicleRequest,} from '../api/types';
 import type {SimulationState, StepLogEntry} from "./types.ts";
 import type {TrafficLightMode} from "../types/simulation.ts";
 
@@ -40,10 +37,10 @@ export function useSimulation() {
         setError(null);
         try {
             const response = await simulationApi.step(simulation.simulationId);
-            const { stepResult } = response;
+            const {stepResult} = response;
 
             setSimulation(prev =>
-                prev ? { ...prev, snapshot: stepResult.snapshot } : prev,
+                prev ? {...prev, snapshot: stepResult.snapshot} : prev,
             );
 
             setStepLog(prev => [
@@ -68,7 +65,7 @@ export function useSimulation() {
             try {
                 const response = await simulationApi.addVehicle(simulation.simulationId, vehicle);
                 setSimulation(prev =>
-                    prev ? { ...prev, snapshot: response.snapshot } : prev,
+                    prev ? {...prev, snapshot: response.snapshot} : prev,
                 );
             } catch (e) {
                 setError(isApiError(e) ? e.message : 'Failed to add vehicle');

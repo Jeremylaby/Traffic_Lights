@@ -3,17 +3,18 @@ import {useCallback, useState} from "react";
 import type {RoadDirection} from "@/types/simulation.ts";
 import {SidebarLabel} from "@/pages/SimulationPage/SimulationPage.style.ts";
 import type {AddVehicleRequest} from "@/api/types.ts";
+
 interface AddVehiclePanelProps {
     isActive: boolean;
-    loading:  boolean;
+    loading: boolean;
     addVehicle: (vehicle: AddVehicleRequest) => Promise<void>;
 }
 
-const AddVehiclePanel = ({ isActive, loading, addVehicle }: AddVehiclePanelProps)=>{
+const AddVehiclePanel = ({isActive, loading, addVehicle}: AddVehiclePanelProps) => {
 
     const [startRoad, setStartRoad] = useState<RoadDirection>('NORTH');
-    const [endRoad,   setEndRoad]   = useState<RoadDirection>('SOUTH');
-    const [carIndex,  setCarIndex]  = useState(1);
+    const [endRoad, setEndRoad] = useState<RoadDirection>('SOUTH');
+    const [carIndex, setCarIndex] = useState(1);
 
     const handleAddVehicle = useCallback(async () => {
         await addVehicle({

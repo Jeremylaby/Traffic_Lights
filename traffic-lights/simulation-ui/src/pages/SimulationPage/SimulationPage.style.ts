@@ -1,23 +1,43 @@
 import styled, {createGlobalStyle, keyframes} from "styled-components";
 
 const fadeIn = keyframes`
-    from { opacity: 0; }
-    to   { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 `;
 
 const pulse = keyframes`
-    0%, 100% { opacity: 1; }
-    50%       { opacity: 0.5; }
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
 `;
 
 const slideUp = keyframes`
-    from { opacity: 0; transform: translateY(6px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 `;
 
 export const GlobalStyle = createGlobalStyle`
     @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=Bebas+Neue&display=swap');
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
     body {
         background: #080809;
         color: #D4D4DC;
@@ -38,9 +58,8 @@ export const Root = styled.div`
 export const GridBg = styled.div`
     position: fixed;
     inset: 0;
-    background-image:
-        linear-gradient(#111116 1px, transparent 1px),
-        linear-gradient(90deg, #111116 1px, transparent 1px);
+    background-image: linear-gradient(#111116 1px, transparent 1px),
+    linear-gradient(90deg, #111116 1px, transparent 1px);
     background-size: 52px 52px;
     pointer-events: none;
     z-index: 0;
@@ -150,7 +169,6 @@ export const Main = styled.main`
 `;
 
 
-
 export const Sidebar = styled.aside`
     width: 200px;
     flex-shrink: 0;
@@ -182,7 +200,9 @@ export const QueueItem = styled.div`
     margin-bottom: 14px;
     animation: ${slideUp} 0.3s ease;
 
-    &:last-child { margin-bottom: 0; }
+    &:last-child {
+        margin-bottom: 0;
+    }
 `;
 
 export const QueueTop = styled.div`
@@ -199,7 +219,6 @@ export const QueueDir = styled.span`
 `;
 
 
-
 export const QueueBar = styled.div`
     height: 2px;
     background: #141418;
@@ -209,18 +228,17 @@ export const QueueBar = styled.div`
 
 export const QueueFill = styled.div<{ $pct: number; $high: boolean }>`
     height: 100%;
-    width: ${({ $pct }) => $pct}%;
-    background: ${({ $high }) => $high ? '#F87171' : '#E8FF47'};
+    width: ${({$pct}) => $pct}%;
+    background: ${({$high}) => $high ? '#F87171' : '#E8FF47'};
     border-radius: 1px;
     transition: width 0.4s ease;
 `;
 
 export const QueueCount = styled.span<{ $high: boolean }>`
     font-size: 10px;
-    color: ${({ $high }) => $high ? '#F87171' : '#3A3A4E'};
+    color: ${({$high}) => $high ? '#F87171' : '#3A3A4E'};
     align-self: flex-end;
 `;
-
 
 
 export const LogEntry = styled.div`
@@ -230,7 +248,9 @@ export const LogEntry = styled.div`
     letter-spacing: 0.03em;
     animation: ${slideUp} 0.2s ease;
 
-    span { color: #6A6A7E; }
+    span {
+        color: #6A6A7E;
+    }
 `;
 
 
@@ -248,9 +268,8 @@ export const CanvasFrame = styled.div`
     border: 1px solid #1A1A22;
     border-radius: 2px;
     padding: 32px;
-    box-shadow:
-        0 0 0 1px #141418,
-        0 32px 80px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 0 1px #141418,
+    0 32px 80px rgba(0, 0, 0, 0.6);
     position: relative;
 
     &::before {
@@ -276,7 +295,6 @@ export const EmptyState = styled.div`
 `;
 
 
-
 export const Footer = styled.footer`
     position: relative;
     z-index: 10;
@@ -295,12 +313,12 @@ export const CtrlBtn = styled.button<{ $disabled?: boolean }>`
     background: transparent;
     border: 1px solid #1A1A22;
     border-radius: 2px;
-    color: ${({ $disabled }) => $disabled ? '#1E1E2A' : '#6A6A7E'};
+    color: ${({$disabled}) => $disabled ? '#1E1E2A' : '#6A6A7E'};
     font-family: 'IBM Plex Mono', monospace;
     font-size: 16px;
     width: 40px;
     height: 40px;
-    cursor: ${({ $disabled }) => $disabled ? 'not-allowed' : 'pointer'};
+    cursor: ${({$disabled}) => $disabled ? 'not-allowed' : 'pointer'};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -313,8 +331,8 @@ export const CtrlBtn = styled.button<{ $disabled?: boolean }>`
 `;
 
 export const StepBtn = styled.button<{ $disabled?: boolean }>`
-    background: ${({ $disabled }) => $disabled ? 'transparent' : '#E8FF47'};
-    border: 1px solid ${({ $disabled }) => $disabled ? '#1A1A22' : '#E8FF47'};
+    background: ${({$disabled}) => $disabled ? 'transparent' : '#E8FF47'};
+    border: 1px solid ${({$disabled}) => $disabled ? '#1A1A22' : '#E8FF47'};
     border-radius: 2px;
     color: #080809;
     font-family: 'IBM Plex Mono', monospace;
@@ -323,8 +341,8 @@ export const StepBtn = styled.button<{ $disabled?: boolean }>`
     letter-spacing: 0.08em;
     padding: 0 24px;
     height: 52px;
-    cursor: ${({ $disabled }) => $disabled ? 'not-allowed' : 'pointer'};
-    opacity: ${({ $disabled }) => $disabled ? 0.25 : 1};
+    cursor: ${({$disabled}) => $disabled ? 'not-allowed' : 'pointer'};
+    opacity: ${({$disabled}) => $disabled ? 0.25 : 1};
     transition: all 0.15s;
     white-space: nowrap;
 

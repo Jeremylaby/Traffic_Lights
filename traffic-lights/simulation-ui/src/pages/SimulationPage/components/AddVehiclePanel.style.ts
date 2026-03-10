@@ -28,21 +28,23 @@ export const RoadSelect = styled.select`
         color: #D4D4DC;
     }
 
-    option { background: #0C0C10; }
+    option {
+        background: #0C0C10;
+    }
 `;
 
 export const AddBtn = styled.button<{ $disabled?: boolean }>`
     background: transparent;
-    border: 1px solid ${({ $disabled }) => $disabled ? '#1A1A22' : '#2A2A38'};
+    border: 1px solid ${({$disabled}) => $disabled ? '#1A1A22' : '#2A2A38'};
     border-radius: 2px;
-    color: ${({ $disabled }) => $disabled ? '#1E1E2A' : '#6A6A7E'};
+    color: ${({$disabled}) => $disabled ? '#1E1E2A' : '#6A6A7E'};
     font-family: 'IBM Plex Mono', monospace;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.1em;
     padding: 7px 0;
     width: 100%;
-    cursor: ${({ $disabled }) => $disabled ? 'not-allowed' : 'pointer'};
+    cursor: ${({$disabled}) => $disabled ? 'not-allowed' : 'pointer'};
     text-transform: uppercase;
     transition: all 0.12s;
 

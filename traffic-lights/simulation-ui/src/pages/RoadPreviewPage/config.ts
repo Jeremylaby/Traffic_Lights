@@ -8,7 +8,7 @@ interface Section {
 }
 
 export const SECTIONS: Section[] = [
-    { title: 'Road Preview — 4 pojazdy', vehicleCount: 4 },
-    { title: 'Road Preview — overflow (6 pojazdów)', vehicleCount: 6 },
-    { title: 'Road Preview — pusta droga', vehicleCount: 0 },
+    {title: 'Road Preview — 4 pojazdy', vehicleCount: 4},
+    {title: 'Road Preview — overflow (6 pojazdów)', vehicleCount: 6},
+    {title: 'Road Preview — pusta droga', vehicleCount: 0},
 ];

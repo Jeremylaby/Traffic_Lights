@@ -1,4 +1,4 @@
-import { ROAD_LENGTH, ROAD_WIDTH} from "./Road/config.ts";
+import {ROAD_LENGTH, ROAD_WIDTH} from "./Road/config.ts";
 import type {RoadDirection} from "@/types/simulation.ts";
 
 
@@ -40,7 +40,6 @@ export const ROAD_CONFIGS: RoadConfig[] = [
         y: IY - (ROAD_LENGTH - ROAD_WIDTH) / 2,
     },
 ];
-
 
 
 interface TrafficLightConfig {

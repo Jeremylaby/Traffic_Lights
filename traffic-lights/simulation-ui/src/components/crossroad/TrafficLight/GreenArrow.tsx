@@ -6,7 +6,7 @@ interface GreenArrowProps {
     active: boolean;
 }
 
-const GreenArrow = ({ active, x, y, }: GreenArrowProps) => {
+const GreenArrow = ({active, x, y,}: GreenArrowProps) => {
 
     const color = active ? '#4ade80' : DIM;
     const panelW = GREEN_ARROW_SIZE;
@@ -16,8 +16,8 @@ const GreenArrow = ({ active, x, y, }: GreenArrowProps) => {
 
     const shaftX1 = x + 4;
     const shaftX2 = cx + 2;
-    const shaftY  = cy;
-    const tipX    = x + panelW - 3;
+    const shaftY = cy;
+    const tipX = x + panelW - 3;
 
     const headPoints = `${tipX},${cy} ${shaftX2},${cy - 4} ${shaftX2},${cy + 4}`;
 
@@ -39,7 +39,7 @@ const GreenArrow = ({ active, x, y, }: GreenArrowProps) => {
                 strokeWidth={2}
                 strokeLinecap="round"
             />
-            <polygon points={headPoints} fill={color} />
+            <polygon points={headPoints} fill={color}/>
         </g>
     );
 };

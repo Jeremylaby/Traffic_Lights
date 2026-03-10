@@ -1,5 +1,5 @@
-import { createContext, useContext } from 'react';
-import type { RoadDirection } from '@/types/simulation.ts';
+import {createContext, useContext} from 'react';
+import type {RoadDirection} from '@/types/simulation.ts';
 
 interface RoadContextValue {
     direction: RoadDirection;

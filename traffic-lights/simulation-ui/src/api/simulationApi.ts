@@ -1,14 +1,14 @@
 import type {
     AddVehicleRequest,
+    ApiError,
     CreateSimulationRequest,
     CreateSimulationResponse,
     SimulationStateResponse,
     StepResponse,
-    ApiError,
 } from './types';
 import type {TrafficLightMode} from "../types/simulation.ts";
 
-const BASE_URL = import.meta.env.VITE_API_URL ;
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 async function request<T>(
     path: string,
@@ -23,8 +23,8 @@ async function request<T>(
     });
 
     if (!response.ok) {
-        const error = await response.json().catch(() => ({ detail: response.statusText }));
-        throw { status: response.status, message: error.detail ?? 'Unknown error', body: error } satisfies ApiError;
+        const error = await response.json().catch(() => ({detail: response.statusText}));
+        throw {status: response.status, message: error.detail ?? 'Unknown error', body: error} satisfies ApiError;
     }
 
     const text = await response.text();
@@ -41,7 +41,7 @@ export const simulationApi = {
         return request<TrafficLightMode[]>('/api/modes');
     },
     createSimulation(strategy: TrafficLightMode): Promise<CreateSimulationResponse> {
-        const body: CreateSimulationRequest = { strategy };
+        const body: CreateSimulationRequest = {strategy};
         return request<CreateSimulationResponse>('/api/simulations', {
             method: 'POST',
             body: JSON.stringify(body),

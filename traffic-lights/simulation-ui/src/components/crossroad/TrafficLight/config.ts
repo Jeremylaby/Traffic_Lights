@@ -8,11 +8,11 @@ export const LIGHT_CONFIG: Record<
     TrafficLightState,
     { red: string; yellow: string; green: string; arrowActive: boolean }
 > = {
-    RED:         { red: RED_COLOR, yellow: DIM,       green: DIM,       arrowActive: false },
-    RED_YELLOW:  { red: RED_COLOR, yellow:YELLOW_COLOR, green: DIM,       arrowActive: false },
-    GREEN_ARROW: { red: RED_COLOR, yellow: DIM,       green: DIM,       arrowActive: true  },
-    GREEN:       { red: DIM,       yellow: DIM,       green: GREEN_COLOR, arrowActive: false },
-    YELLOW:      { red: DIM,       yellow: YELLOW_COLOR, green: DIM,       arrowActive: false },
+    RED: {red: RED_COLOR, yellow: DIM, green: DIM, arrowActive: false},
+    RED_YELLOW: {red: RED_COLOR, yellow: YELLOW_COLOR, green: DIM, arrowActive: false},
+    GREEN_ARROW: {red: RED_COLOR, yellow: DIM, green: DIM, arrowActive: true},
+    GREEN: {red: DIM, yellow: DIM, green: GREEN_COLOR, arrowActive: false},
+    YELLOW: {red: DIM, yellow: YELLOW_COLOR, green: DIM, arrowActive: false},
 };
 
 export const GREEN_ARROW_SIZE = 20

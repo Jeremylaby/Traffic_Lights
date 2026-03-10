@@ -61,6 +61,7 @@ const lerp = (a: number, b: number, n: number): number[] =>
 
 const opacity = (n: number): number[] =>
     Array.from({length: n}, (_, i) => (i < n - 1 ? 1 : 0));
+
 export interface ExitKeyframes {
     x?: number[] | number;
     y?: number[] | number;

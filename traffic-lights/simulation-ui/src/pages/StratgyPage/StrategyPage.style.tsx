@@ -1,26 +1,43 @@
 import styled, {createGlobalStyle, keyframes} from "styled-components";
 
 const fadeUp = keyframes`
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 `;
 
 const blink = keyframes`
-    0%, 100% { opacity: 1; }
-    50%       { opacity: 0; }
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
 `;
 
 const scanline = keyframes`
-    0%   { transform: translateY(-100%); }
-    100% { transform: translateY(100vh); }
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(100vh);
+    }
 `;
-
 
 
 export const GlobalStyle = createGlobalStyle`
     @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=Bebas+Neue&display=swap');
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
 
     body {
         background: #080809;
@@ -41,9 +58,8 @@ export const Root = styled.div`
 export const GridBg = styled.div`
     position: fixed;
     inset: 0;
-    background-image:
-        linear-gradient(#141418 1px, transparent 1px),
-        linear-gradient(90deg, #141418 1px, transparent 1px);
+    background-image: linear-gradient(#141418 1px, transparent 1px),
+    linear-gradient(90deg, #141418 1px, transparent 1px);
     background-size: 52px 52px;
     pointer-events: none;
     z-index: 0;
@@ -66,7 +82,8 @@ export const Scanline = styled.div`
     &::after {
         content: '';
         position: absolute;
-        left: 0; right: 0;
+        left: 0;
+        right: 0;
         height: 120px;
         background: linear-gradient(transparent, rgba(232, 255, 71, 0.015), transparent);
         animation: ${scanline} 8s linear infinite;
@@ -121,7 +138,8 @@ export const Title = styled.h1`
         color: #E8FF47;
         display: block;
     }
-    p{
+
+    p {
         font-size: 40px;
     }
 `;
@@ -185,7 +203,7 @@ export const Card = styled.button<{ $active: boolean; $color: string, $index: nu
 
     &:hover {
         border-color: #2A2A38;
-        border-left-color: ${({ $color }) => $color};
+        border-left-color: ${({$color}) => $color};
         background: #0C0C12;
     }
 
@@ -209,7 +227,7 @@ export const CardName = styled.span<{ $active: boolean }>`
     font-family: 'Bebas Neue', sans-serif;
     font-size: 22px;
     letter-spacing: 0.04em;
-    color: ${({ $active }) => $active ? '#ECECF4' : '#4A4A5E'};
+    color: ${({$active}) => $active ? '#ECECF4' : '#4A4A5E'};
     transition: color 0.12s;
     line-height: 1;
 `;
@@ -218,7 +236,7 @@ export const CardTag = styled.span<{ $color: string; $active: boolean }>`
     font-size: 9px;
     font-weight: 700;
     letter-spacing: 0.15em;
-    color: ${({ $color, $active }) => $active ? $color : '#2E2E3C'};
+    color: ${({$color, $active}) => $active ? $color : '#2E2E3C'};
     text-transform: uppercase;
     transition: color 0.12s;
 `;
@@ -226,7 +244,7 @@ export const CardTag = styled.span<{ $color: string; $active: boolean }>`
 export const CardDesc = styled.p<{ $active: boolean }>`
     font-size: 12px;
     line-height: 1.65;
-    color: ${({ $active }) => $active ? '#5A5A72' : '#2E2E3C'};
+    color: ${({$active}) => $active ? '#5A5A72' : '#2E2E3C'};
     transition: color 0.12s;
     max-width: 480px;
 `;
@@ -235,13 +253,13 @@ export const RadioDot = styled.div<{ $active: boolean; $color: string }>`
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    border: 2px solid ${({ $active, $color }) => $active ? $color : '#2A2A38'};
-    background: ${({ $active, $color }) => $active ? $color : 'transparent'};
+    border: 2px solid ${({$active, $color}) => $active ? $color : '#2A2A38'};
+    background: ${({$active, $color}) => $active ? $color : 'transparent'};
     margin-top: 6px;
     flex-shrink: 0;
     transition: all 0.12s;
 
-    ${({ $active }) => $active && `
+    ${({$active}) => $active && `
         box-shadow: 0 0 8px currentColor;
     `}
 `;
@@ -249,12 +267,12 @@ export const RadioDot = styled.div<{ $active: boolean; $color: string }>`
 export const RunBtn = styled.button<{ $enabled: boolean }>`
     margin-top: 24px;
     align-self: flex-end;
-    background: ${({ $enabled }) => $enabled ? '#E8FF47' : 'transparent'};
-    border: 1px solid ${({ $enabled }) => $enabled ? '#E8FF47' : '#1E1E2A'};
+    background: ${({$enabled}) => $enabled ? '#E8FF47' : 'transparent'};
+    border: 1px solid ${({$enabled}) => $enabled ? '#E8FF47' : '#1E1E2A'};
     border-radius: 2px;
     padding: 14px 40px;
-    cursor: ${({ $enabled }) => $enabled ? 'pointer' : 'not-allowed'};
-    opacity: ${({ $enabled }) => $enabled ? 1 : 0.35};
+    cursor: ${({$enabled}) => $enabled ? 'pointer' : 'not-allowed'};
+    opacity: ${({$enabled}) => $enabled ? 1 : 0.35};
     transition: all 0.15s;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 12px;
@@ -264,7 +282,7 @@ export const RunBtn = styled.button<{ $enabled: boolean }>`
     text-transform: uppercase;
 
     &:hover {
-        ${({ $enabled }) => $enabled && `
+        ${({$enabled}) => $enabled && `
             background: #F4FF80;
             box-shadow: 0 0 24px rgba(232, 255, 71, 0.3);
         `}

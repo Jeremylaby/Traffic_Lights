@@ -1,15 +1,24 @@
 import styled, {keyframes} from "styled-components";
 
 
-
 export const pulse = keyframes`
-    0%, 100% { opacity: 0.5; }
-    50%       { opacity: 1;   }
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
 `;
 
 const fadeIn = keyframes`
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 `;
 
 export const Page = styled.div`
@@ -84,7 +93,10 @@ export const RefreshBtn = styled.button`
         color: #4ade80;
         background: rgba(74, 222, 128, 0.05);
     }
-    &:active { transform: scale(0.97); }
+
+    &:active {
+        transform: scale(0.97);
+    }
 `;
 
 export const Main = styled.div`
@@ -140,18 +152,23 @@ export const StepBar = styled.div`
 
 export const StepBtn = styled.button<{ $primary?: boolean }>`
     background: transparent;
-    border: 1px solid ${({ $primary }) => ($primary ? '#4ade80' : '#1e293b')};
+    border: 1px solid ${({$primary}) => ($primary ? '#4ade80' : '#1e293b')};
     border-radius: 3px;
-    color: ${({ $primary }) => ($primary ? '#4ade80' : '#475569')};
+    color: ${({$primary}) => ($primary ? '#4ade80' : '#475569')};
     font-family: 'Courier New', monospace;
     font-size: 10px;
     letter-spacing: 2px;
     padding: 6px 14px;
     cursor: pointer;
     transition: all 0.15s;
-    &:disabled { opacity: 0.25; cursor: default; }
+
+    &:disabled {
+        opacity: 0.25;
+        cursor: default;
+    }
+
     &:not(:disabled):hover {
-        background: ${({ $primary }) =>
+        background: ${({$primary}) =>
                 $primary ? 'rgba(74,222,128,0.08)' : 'rgba(255,255,255,0.03)'};
     }
 `;
@@ -189,11 +206,11 @@ export const LightBadge = styled.span<{ $state: string }>`
     letter-spacing: 1px;
     padding: 2px 6px;
     border-radius: 2px;
-    color: ${({ $state }) => {
-    if ($state === 'GREEN' || $state === 'GREEN_ARROW') return '#4ade80';
-    if ($state === 'YELLOW' || $state === 'RED_YELLOW')  return '#facc15';
-    return '#f87171';
-}};
+    color: ${({$state}) => {
+        if ($state === 'GREEN' || $state === 'GREEN_ARROW') return '#4ade80';
+        if ($state === 'YELLOW' || $state === 'RED_YELLOW') return '#facc15';
+        return '#f87171';
+    }};
     border: 1px solid currentColor;
 `;
 
@@ -211,10 +228,11 @@ export const VehicleRow = styled.div`
     margin-top: 4px;
 `;
 
-export const VehicleId  = styled.span`color: #94a3b8;`;
+export const VehicleId = styled.span`color: #94a3b8;`;
 export const VehicleArrow = styled.span`color: #334155;`;
 export const VehicleEnd = styled.span`color: #64748b;`;
-export const MoveBadge  = styled.span`color: #475569; letter-spacing: 1px;`;
+export const MoveBadge = styled.span`color: #475569;
+    letter-spacing: 1px;`;
 
 export const SourceBox = styled.div`
     margin-top: 12px;
