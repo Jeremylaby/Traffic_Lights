@@ -1,7 +1,7 @@
 package pl.jeremy.cli.io;
 
+import pl.jeremy.model.crossroad.CrossroadDto;
 import pl.jeremy.model.vehicle.Vehicle;
-import pl.jeremy.simulation.util.SimulationSnapshot;
 import pl.jeremy.simulation.util.StepResult;
 
 public final class SimulationStepLogger {
@@ -15,7 +15,7 @@ public final class SimulationStepLogger {
     }
 
     private String render(StepResult stepResult) {
-        SimulationSnapshot s = stepResult.snapshot();
+        CrossroadDto c = stepResult.snapshot().crossroad();
 
         return """
                STEP %d
@@ -23,15 +23,15 @@ public final class SimulationStepLogger {
                Queues: N=%d S=%d E=%d W=%d
                Left: %s
                """.formatted(
-                        stepResult.stepNumber(),
-                        s.northLight(),
-                        s.southLight(),
-                        s.eastLight(),
-                        s.westLight(),
-                        s.northQueue(),
-                        s.southQueue(),
-                        s.eastQueue(),
-                        s.westQueue(),
-                        stepResult.leftVehicleIds());
+                        stepResult.snapshot().stepNumber(),
+                        c.northRoad().trafficLightState(),
+                        c.southRoad().trafficLightState(),
+                        c.eastRoad().trafficLightState(),
+                        c.westRoad().trafficLightState(),
+                        c.northRoad().queueSize(),
+                        c.southRoad().queueSize(),
+                        c.eastRoad().queueSize(),
+                        c.westRoad().queueSize(),
+                        stepResult.leftVehicles());
     }
 }

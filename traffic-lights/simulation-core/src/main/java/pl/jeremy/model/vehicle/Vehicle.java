@@ -19,6 +19,10 @@ public class Vehicle {
         return route.startRoad();
     }
 
+    public RoadDirection getEndRoad() {
+        return route.endRoad();
+    }
+
     public VehicleRoute getRoute() {
         return route;
     }

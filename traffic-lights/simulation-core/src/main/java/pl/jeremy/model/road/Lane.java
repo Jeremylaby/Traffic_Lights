@@ -38,6 +38,10 @@ public class Lane {
         return vehicles.isEmpty();
     }
 
+    public Queue<Vehicle> getVehicles() {
+        return vehicles;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) {

@@ -8,12 +8,10 @@ import pl.jeremy.cli.dto.SimulationInputDto;
 import pl.jeremy.cli.io.JsonInputReader;
 import pl.jeremy.cli.io.JsonOutputWriter;
 import pl.jeremy.cli.io.SimulationStepLogger;
-import pl.jeremy.config.TrafficLightMode;
-import pl.jeremy.config.TrafficLightStrategyFactory;
 import pl.jeremy.model.vehicle.Vehicle;
 import pl.jeremy.simulation.CrossroadSimulation;
-import pl.jeremy.simulation.PolishVehicleReleasePolicy;
-import pl.jeremy.simulation.strategy.TrafficLightStrategy;
+import pl.jeremy.simulation.factory.SimulationStrategyFactory;
+import pl.jeremy.simulation.factory.TrafficLightMode;
 import pl.jeremy.simulation.util.StepResult;
 
 public class Main {
@@ -31,16 +29,14 @@ public class Main {
 
         SimulationInputDto input = inputReader.read(inputPath);
         System.out.println("Running simulation with mode: " + mode);
-        TrafficLightStrategy trafficLightStrategy = TrafficLightStrategyFactory.create(mode);
-        List<StepResult> stepResults = getStepResults(trafficLightStrategy, input, stepLogger);
+        CrossroadSimulation simulation = SimulationStrategyFactory.create(mode);
+        List<StepResult> stepResults = getStepResults(simulation, input, stepLogger);
 
         outputWriter.write(outputPath, stepResults);
     }
 
     private static List<StepResult> getStepResults(
-            TrafficLightStrategy trafficLightStrategy, SimulationInputDto input, SimulationStepLogger stepLogger) {
-        CrossroadSimulation simulation =
-                new CrossroadSimulation(trafficLightStrategy, new PolishVehicleReleasePolicy());
+            CrossroadSimulation simulation, SimulationInputDto input, SimulationStepLogger stepLogger) {
 
         List<StepResult> stepResults = new ArrayList<>();
 
