@@ -1,0 +1,35 @@
+services:
+
+  simulation-api:
+    build:
+      context: ./traffic-lights
+      dockerfile: simulation-api/Dockerfile
+    container_name: traffic-lights-api
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8080/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    networks:
+      - traffic-lights-net
+
+  simulation-ui:
+    build:
+      context: ./traffic-lights/simulation-ui
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: http://localhost:8080
+    container_name: traffic-lights-ui
+    ports:
+      - "4173:80"
+    depends_on:
+      simulation-api:
+        condition: service_healthy
+    networks:
+      - traffic-lights-net
+networks:
+  traffic-lights-net:
+    driver: bridge
