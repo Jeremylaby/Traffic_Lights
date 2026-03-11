@@ -1,0 +1,17 @@
+
+**/build
+**/.gradle
+*.iml
+*.log
+*.tmp
+.DS_Store
+
+.idea
+**/*.iml
+.vscode
+
+*.class
+
+
+simulation-ui
+simulation-cli
