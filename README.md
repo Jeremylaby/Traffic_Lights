@@ -2,6 +2,8 @@
 
 A CLI-based simulation of an intelligent traffic-light controlled crossroads.
 
+![Demo](img/traffic_1.gif)
+
 ## Requirements
 
 - **JDK 21** (Java 21)
